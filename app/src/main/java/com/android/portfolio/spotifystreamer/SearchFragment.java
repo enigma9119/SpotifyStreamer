@@ -52,16 +52,16 @@ public class SearchFragment extends Fragment {
 
     public void searchArtist(String query) {
         FetchArtistsTask artistsTask = new FetchArtistsTask();
-        artistsTask.execute();
+        artistsTask.execute(query);
     }
 
-    private class FetchArtistsTask extends AsyncTask<Void, Void, ArtistsPager> {
+    private class FetchArtistsTask extends AsyncTask<String, Void, ArtistsPager> {
 
         @Override
-        protected ArtistsPager doInBackground(Void... params) {
+        protected ArtistsPager doInBackground(String... params) {
             SpotifyApi api = new SpotifyApi();
             SpotifyService spotify = api.getService();
-            return spotify.searchArtists("beyonce");
+            return spotify.searchArtists(params[0]);
         }
 
         @Override
