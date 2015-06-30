@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="green_theme">#64A857</color>
+    <color name="material_green_600">#43A047</color>
+    <color name="material_green_800">#2E7D32</color>
+    <color name="material_indigo_A200">#536DFE</color>
+
+</resources>
