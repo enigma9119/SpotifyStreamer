@@ -17,6 +17,7 @@ import kaaes.spotify.webapi.android.models.Pager;
 
 /**
  * Created by Smitesh on 6/28/2015.
+ * An adapter to load a list of artists in the search screen.
  */
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
     private Pager<Artist> mArtists;
@@ -40,7 +41,12 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
         holder.mArtistName.setText(artist.name);
         if (artist.images.size() != 0) {
-            Picasso.with(context).load(artist.images.get(0).url).into(holder.mArtistImage);
+            Picasso.with(context).load(artist.images.get(0).url)
+                    .placeholder(R.drawable.artist_placeholder)
+                    .into(holder.mArtistImage);
+        } else {
+            // Load a placeholder image if no artist image is found
+            Picasso.with(context).load(R.drawable.artist_placeholder).into(holder.mArtistImage);
         }
     }
 

@@ -17,7 +17,7 @@ import kaaes.spotify.webapi.android.models.ArtistsPager;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * A fragment used to search and populate search results.
  */
 public class SearchFragment extends Fragment {
 
