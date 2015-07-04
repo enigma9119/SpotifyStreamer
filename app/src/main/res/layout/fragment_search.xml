@@ -13,4 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:id="@+id/no_artists"
+        android:visibility="gone"
+        android:text="@string/no_artists"
+        android:textSize="22sp"
+        android:textColor="@color/accent_material_light"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </FrameLayout>

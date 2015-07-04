@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,6 +27,8 @@ public class SearchFragment extends Fragment {
 
     @InjectView(R.id.recyclerview_artists)
     RecyclerView mRecyclerView;
+    @InjectView(R.id.no_artists)
+    TextView mNoArtists;
 
     public SearchFragment() {
     }
@@ -66,9 +69,15 @@ public class SearchFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArtistsPager artistsPager) {
-            if (artistsPager != null) {
+            if (artistsPager != null && artistsPager.artists.items.size() != 0) {
+                mNoArtists.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
                 mArtistAdapter.updateAdapter(artistsPager.artists);
                 mArtistAdapter.notifyDataSetChanged();
+            } else {
+                // If no artists are found, display a message
+                mNoArtists.setVisibility(View.VISIBLE);
+                mRecyclerView.setVisibility(View.GONE);
             }
         }
     }

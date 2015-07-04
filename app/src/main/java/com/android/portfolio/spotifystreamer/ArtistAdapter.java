@@ -52,7 +52,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        if (mArtists != null && mArtists.items.size() != 0)
+        if (mArtists != null)
             return mArtists.items.size();
         else
             return 0;
