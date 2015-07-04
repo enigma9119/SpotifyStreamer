@@ -8,7 +8,25 @@
         tools:layout="@layout/fragment_search" android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include android:id="@+id/empty_view"
-        layout="@layout/empty_view" />
+    <LinearLayout
+        android:id="@+id/empty_view"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:src="@drawable/spotify"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:contentDescription="@string/spotify_icon_description" />
+
+        <TextView
+            android:text="@string/welcome_message"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            style="@style/EmptyView" />
+
+    </LinearLayout>
 
 </FrameLayout>
