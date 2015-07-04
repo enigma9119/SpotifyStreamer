@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            findViewById(R.id.empty_view).setVisibility(View.GONE);
             String query = intent.getStringExtra(SearchManager.QUERY);
             SearchFragment searchFragment = (SearchFragment) getFragmentManager().findFragmentById(R.id.fragment);
             searchFragment.searchArtist(query);
