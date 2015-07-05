@@ -23,7 +23,6 @@ import kaaes.spotify.webapi.android.models.ArtistsPager;
 public class SearchFragment extends Fragment {
 
     private ArtistAdapter mArtistAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @InjectView(R.id.recyclerview_artists)
     RecyclerView mRecyclerView;
@@ -43,8 +42,7 @@ public class SearchFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
 
         // Use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Specify an adapter
         mArtistAdapter = new ArtistAdapter();
@@ -69,7 +67,7 @@ public class SearchFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArtistsPager artistsPager) {
-            if (artistsPager != null && artistsPager.artists.items.size() != 0) {
+            if (artistsPager != null && !artistsPager.artists.items.isEmpty()) {
                 mNoArtists.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 mArtistAdapter.updateAdapter(artistsPager.artists);

@@ -1,6 +1,7 @@
 package com.android.portfolio.spotifystreamer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,13 +41,15 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         Context context = holder.mArtistImage.getContext();
 
         holder.mArtistName.setText(artist.name);
-        if (artist.images.size() != 0) {
+        if (!artist.images.isEmpty()) {
             Picasso.with(context).load(artist.images.get(0).url)
                     .placeholder(R.drawable.artist_placeholder)
                     .into(holder.mArtistImage);
+            holder.createParcelable(artist, artist.images.get(0).url);
         } else {
             // Load a placeholder image if no artist image is found
             Picasso.with(context).load(R.drawable.artist_placeholder).into(holder.mArtistImage);
+            holder.createParcelable(artist, null);
         }
     }
 
@@ -58,15 +61,32 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
             return 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.artist_name)
         TextView mArtistName;
         @InjectView(R.id.artist_image)
         ImageView mArtistImage;
 
+        private ParcelableArtist mParcelableArtist;
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            intent.putExtra(DetailFragment.EXTRA_ARTIST, mParcelableArtist);
+            v.getContext().startActivity(intent);
+        }
+
+        public void createParcelable(Artist artist, String artistImageUrl) {
+            mParcelableArtist = new ParcelableArtist();
+            mParcelableArtist.setArtistName(artist.name);
+            mParcelableArtist.setArtistImageUrl(artistImageUrl);
+            mParcelableArtist.setArtistId(artist.id);
         }
     }
 }
